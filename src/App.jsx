@@ -9,7 +9,7 @@ function App() {
       <section className="bg-[#222222] w-full pl-[340px] pr-10">
         <div className="w-full flex justify-start items-start flex-col gap-[18px]">
           <h2 className="text-[38px] font-bold text-white">Good morning</h2>
-          <div className="grid grid-cols-2 justify-start items-start gap-x-[30px] gap-y-5">
+          <div className="grid grid-cols-4 justify-start items-start gap-x-[30px] gap-y-5">
             {[1, 2, 3].map(() => (
               <Genre title="Liked Songs" />
             ))}
@@ -22,7 +22,7 @@ function App() {
               SEE ALL
             </a>
           </div>
-          <div className="grid grid-cols-4 justify-start items-start gap-x-[30px] gap-y-5">
+          <div className="grid grid-cols-6 justify-start items-start gap-x-[30px] gap-y-5">
             {[1, 2, 3, 4, 5].map(() => (
               <ArtistBlock title="MEDITATION SELF" author="Ibn Hussain Aleen" />
             ))}
