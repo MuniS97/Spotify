@@ -1,9 +1,30 @@
-import Layout from "../layout/Layout";
+import { useEffect } from "react";
+import BrowseAll from "../components/BrowseAll";
+import Guardian from "../modules/Guardian";
 
 export default function Search() {
+  const token = localStorage.getItem('token')
+
+  useEffect(() => {
+    fetch("https://api.spotify.com/v1/browse/categories?limit=10", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((res) => res.json())
+      .then((res) => console.log(res.categories.items));
+  });
+
   return (
-    <section className="w-full flex items-center justify-center">
-      <h1>Search</h1>
+    <section className="bg-[#222222] w-full pl-[340px] pr-10 h-screen flex flex-col justify-start items-start">
+      <div className="flex items-start flex-col justify-start py-20 gap-7">
+        <h2 className="text-white text-3xl font-bold">Browse All</h2>
+        <div className="grid grid-cols-5 justify-start items-start gap-x-[30px] gap-y-5">
+          {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(() => (
+            <BrowseAll />
+          ))}
+        </div>
+      </div>
     </section>
   );
 }
