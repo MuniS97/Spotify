@@ -1,6 +1,5 @@
 import { useEffect } from "react";
 import BrowseAll from "../components/BrowseAll";
-import Guardian from "../modules/Guardian";
 
 export default function Search() {
   const token = localStorage.getItem("token");

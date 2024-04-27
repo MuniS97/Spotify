@@ -13,36 +13,12 @@ export default function Login() {
 
   return (
     <>
-      <section className="bg-[#222222] flex items-center justify-center w-full h-screen relative">
-        <a href={url} className="text-white z-10 text-4xl cursor-pointer relative">
-          <button>Login with spotify</button>
-          <span className="select-none absolute left-[-100%]  w-[800px] h-[2px] bg-[#40cc47] rotate-[75deg]"></span>
-          <span className="select-none absolute left-[-90%]  w-[800px] h-[2px] bg-[#40cc47] rotate-[75deg]"></span>
+      <section className="bg-[#222222] flex items-center flex-col gap-[10px] justify-center w-full h-screen text-white">
+        <img className="w-[200px] object-cover" src="/icons/big-logo.svg" alt="logo" />
+        <h1 className="text-[35px] font-normal">Войти с помощью Spotify</h1>
+        <a href={url} className=" z-10 text-2xl cursor-pointer">
+          <button className="bg-green-500 p-[12px] rounded-[10px]">Login with spotify</button>
         </a>
-        <div className="absolute w-full max-w-[1920px] h-screen">
-          <div className="relative w-full max-w-[1920px] h-screen">
-            <ImSpotify
-              className="select-none absolute top-[5%] left-[5%] rotate-[-25deg]"
-              size={400}
-              color="#40cc47"
-            />
-            <FaHeadphonesAlt
-              className="select-none absolute bottom-[20%] right-[17%]"
-              size={200}
-              color="#40cc47"
-            />
-            <GiMusicalNotes
-              className="select-none absolute bottom-[12%] left-[30%] rotate-[-10deg]"
-              size={150}
-              color="#40cc47"
-            />
-            <BsMusicPlayerFill
-              className="select-none absolute top-[10%] right-[20%] rotate-[10deg]"
-              size={150}
-              color="#40cc47"
-            />
-          </div>
-        </div>
       </section>
     </>
   );

@@ -3,19 +3,31 @@ import ProfileMenu from "../components/ProfileMenu";
 import { AiFillHome } from "react-icons/ai";
 import { FiSearch } from "react-icons/fi";
 import { LuLibrary } from "react-icons/lu";
-import { Link, Outlet, useLocation } from "react-router-dom";
-import Guardian from "../modules/Guardian";
+import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 export default function Layout() {
-  Guardian()
-
+  const [token, setToken] = useState("");
+  const navigate = useNavigate();
   const router = useLocation();
 
-  if(!router.pathname.includes('search') && useLocation().hash) {
-      const token = useLocation().hash.split("=")[1].split("&")[0]
-      localStorage.setItem("token", token)
-  }
+  useEffect(() => {
+    let token = localStorage.getItem("token");
+    let hash = location.hash;
 
+    if (!token && hash) {
+      token = hash.split("=")[1].split("&")[0];
+
+      location.href = "";
+      localStorage.setItem("token", token);
+    }
+
+    setToken(token);
+  }, []);
+
+  if (!token) {
+    navigate("/login");
+  }
 
   return (
     <>
