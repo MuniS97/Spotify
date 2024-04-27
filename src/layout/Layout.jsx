@@ -77,7 +77,9 @@ export default function Layout() {
           </ul>
         </nav>
       </aside>
-      <Outlet />
+      <main className="pl-[340px] pr-10  w-full bg-[#222222]">
+        <Outlet />
+      </main>
       <div></div>
     </>
   );

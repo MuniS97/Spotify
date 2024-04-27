@@ -21,7 +21,7 @@ export default function Home() {
   }, [])
 
   return (
-    <section className="bg-[#222222] w-full pl-[340px] pr-10 h-screen">
+    <div className="h-screen">
       <div className="w-full flex justify-start items-start flex-col gap-[18px]">
         <h2 className="text-[38px] font-bold text-white">Good morning</h2>
         <div className="grid grid-cols-4 justify-start items-start gap-x-[30px] gap-y-5">
@@ -43,6 +43,6 @@ export default function Home() {
 
         </div>
       </div>
-    </section>
+    </div>
   );
 }
