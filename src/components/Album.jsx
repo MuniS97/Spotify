@@ -2,7 +2,7 @@
 
 
 
-export default function ArtistBlock(props) {
+export default function Album(props) {
     return (
         <>
             <div className="cursor-pointer w-[230px] -h[300px] bg-[#181818] flex justify-start items-start gap-6 p-5 flex-col">
