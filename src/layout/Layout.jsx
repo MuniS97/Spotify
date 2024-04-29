@@ -31,7 +31,7 @@ export default function Layout() {
 
   return (
     <>
-      <header className="bg-[#222222] w-full flex justify-between items-center pl-[340px] pr-10 py-5">
+      <header className="bg-[#222222] w-full flex justify-between items-center pl-[340px] pr-10 py-5 z-10">
         <div className="flex items-center gap-1">
           <button className="bg-[#131313] rounded-full p-2">
             <MdKeyboardArrowLeft size={24} color="white" />
@@ -52,7 +52,7 @@ export default function Layout() {
         </div>
         <ProfileMenu />
       </header>
-      <aside className="w-[300px] bg-black px-2.5 py-8 fixed top-0 left-0 bottom-0 flex flex-col items-start gap-[30px]">
+      <aside className="z-10 w-[300px] bg-black px-2.5 py-8 fixed top-0 left-0 bottom-0 flex flex-col items-start gap-[30px]">
         <img className="pl-6" src="/icons/big-logo.svg" alt="logo" />
         <nav>
           <ul>
