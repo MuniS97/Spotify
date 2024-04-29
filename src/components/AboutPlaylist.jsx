@@ -19,7 +19,7 @@ function AboutPlaylist() {
 
   return (
     <>
-      <div className="py-[30px] px-[40px] flex justify-start items-end gap-8 py-[100px] pl-[340px] pr-10">
+      <div className="px-[40px] flex justify-start items-end gap-8 py-[100px] pl-[340px] pr-10">
         {chosedPlaylist?.images ? (
           <img
             className="w-[297px] h-[297px]"
