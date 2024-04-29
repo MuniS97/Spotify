@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react";
 import { FaCirclePlay } from "react-icons/fa6";
 import { FaRegHeart } from "react-icons/fa";
-
+import { MdOutlineDownloading } from "react-icons/md";
+import { SlOptions } from "react-icons/sl";
+import { IoSearch } from "react-icons/io5";
+import { IoMdArrowDropdown } from "react-icons/io";
 
 export default function Playlist() {
   const base_url = import.meta.env.VITE_BASE_URL;
@@ -53,13 +56,17 @@ export default function Playlist() {
       </div>
 
       <div className="w-full h-screen bg-slate-700">
-        <div className="flex justify-between items-center">
+        <div className="flex justify-between items-center py-[30px] px-[40px]">
           <div className="flex justify-center items-center gap-[35px]">
-            <FaCirclePlay size={72} color="green"/>
-            <FaRegHeart size={52} color="white"/>
+            <FaCirclePlay className="cursor-pointer" size={72} color="green"/>
+            <FaRegHeart className="cursor-pointer" size={52} color="white"/>
+            <MdOutlineDownloading className="cursor-pointer" size={52} color="white"/>
+            <SlOptions className="cursor-pointer" size={52} color="white"/>
           </div>
-          <div>
-
+          <div className="flex justify-center items-center gap-5">
+            <IoSearch className="cursor-pointer" size={21} color="white"/>
+            <span className="text-white text-[18px] font-normal">Custom order</span>
+            <IoMdArrowDropdown className="cursor-pointer" size={21} color="white"/>
           </div>
         </div>
       </div>
