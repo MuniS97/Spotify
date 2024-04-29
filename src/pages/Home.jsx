@@ -9,6 +9,7 @@ export default function Home() {
   const [albums, setAlbums] = useState([]);
   const [aboutMe, setAboutMe] = useState([]);
   const [tracksForMe, setTracksForMe] = useState([]);
+  const [recommended, setRecommended] = useState([])
 
   useEffect(() => {
     fetch(base_url + "/me", {
@@ -45,6 +46,13 @@ export default function Home() {
     })
       .then((res) => res.json())
       .then((res) => setTracksForMe(res.albums.items));
+
+    fetch(base_url + "/recommendations?seed_genres=j-rock%2Ccountry", {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    }).then(res => res.json())
+      .then(res => setRecommended(res.tracks))
   }, []);
 
   return (
@@ -85,9 +93,6 @@ export default function Home() {
       <div className="w-full flex flex-col justify-start items-start gap-7">
         <div className="w-full flex justify-between items-center text-white pt-10">
           <h2 className="font-bold text-3xl">Shows you might like</h2>
-          <a href="#" className="font-normal text-[17px] no-underline">
-            SEE ALL
-          </a>
         </div>
         <div className="grid grid-cols-6 justify-start items-start gap-x-[30px] gap-y-5">
           {albums.slice(0, 6).map((item) => (
@@ -100,6 +105,25 @@ export default function Home() {
           ))}
         </div>
       </div>
+      {/* <div className="w-full flex flex-col justify-start items-start gap-7">
+        <div className="w-full flex justify-between items-center text-white pt-10">
+          <h2 className="font-bold text-3xl">J-Rock recommendations</h2>
+          <a href="#" className="font-normal text-[17px] no-underline">
+            SEE ALL
+          </a>
+        </div>
+        <div className="grid grid-cols-6 justify-start items-start gap-x-[30px] gap-y-5">
+          {recommended.map(item => {
+            <Album
+            key={item.id}
+            img={item.album.images[0].url}
+            title={item.album.name}
+            author={item.album.artists[0].name}
+            />
+          })
+          }
+        </div>
+       </div> */}
     </div>
   );
 }
