@@ -33,7 +33,7 @@ export default function Playlist() {
   }, []);
 
   return (
-    <div className="h-full bg-yellow-400 p-0">
+    <div className="h-full bg-yellow-400 pl-[340px] pr-10  w-full">
       <div className="py-[30px] px-[40px] flex justify-start items-end gap-8">
         <img
           className="w-[297px] h-[297px]"
@@ -58,15 +58,25 @@ export default function Playlist() {
       <div className="w-full h-screen bg-slate-700">
         <div className="flex justify-between items-center py-[30px] px-[40px]">
           <div className="flex justify-center items-center gap-[35px]">
-            <FaCirclePlay className="cursor-pointer" size={72} color="green"/>
-            <FaRegHeart className="cursor-pointer" size={52} color="white"/>
-            <MdOutlineDownloading className="cursor-pointer" size={52} color="white"/>
-            <SlOptions className="cursor-pointer" size={52} color="white"/>
+            <FaCirclePlay className="cursor-pointer" size={72} color="green" />
+            <FaRegHeart className="cursor-pointer" size={52} color="white" />
+            <MdOutlineDownloading
+              className="cursor-pointer"
+              size={52}
+              color="white"
+            />
+            <SlOptions className="cursor-pointer" size={52} color="white" />
           </div>
           <div className="flex justify-center items-center gap-5">
-            <IoSearch className="cursor-pointer" size={21} color="white"/>
-            <span className="text-white text-[18px] font-normal">Custom order</span>
-            <IoMdArrowDropdown className="cursor-pointer" size={21} color="white"/>
+            <IoSearch className="cursor-pointer" size={21} color="white" />
+            <span className="text-white text-[18px] font-normal">
+              Custom order
+            </span>
+            <IoMdArrowDropdown
+              className="cursor-pointer"
+              size={21}
+              color="white"
+            />
           </div>
         </div>
       </div>

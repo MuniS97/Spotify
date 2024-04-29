@@ -15,7 +15,7 @@ export default function Search() {
   });
 
   return (
-    <div className="w-full bg-[#222222] h-full flex flex-col justify-start items-start">
+    <div className="pl-[340px] pr-10  w-full bg-[#222222] h-full flex flex-col justify-start items-start">
       <div className="flex items-start flex-col justify-start py-20 gap-7">
         <h2 className="text-white text-3xl font-bold">Browse All</h2>
         <div className="grid grid-cols-5 justify-start items-start gap-x-[30px] gap-y-5">

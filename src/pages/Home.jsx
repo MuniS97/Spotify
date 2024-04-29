@@ -56,7 +56,7 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="h-full">
+    <div className="h-full pl-[340px] pr-10  w-full bg-[#222222]">
       <div className="w-full flex justify-start items-start flex-col gap-[18px]">
         <h2 className="text-[38px] font-bold text-white">Good morning</h2>
         <div className="grid grid-cols-4 justify-start items-start gap-x-[30px] gap-y-5">
