@@ -5,6 +5,7 @@ import { FiSearch } from "react-icons/fi";
 import { LuLibrary } from "react-icons/lu";
 import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
+import Player from "../components/Player";
 
 export default function Layout() {
   const [token, setToken] = useState("");
@@ -80,7 +81,7 @@ export default function Layout() {
       <main>
         <Outlet />
       </main>
-      <div></div>
+      <Player/>
     </>
   );
 }
