@@ -3,11 +3,10 @@ import { FaRegHeart } from "react-icons/fa";
 import { MdOutlineDownloading } from "react-icons/md";
 import { SlOptions } from "react-icons/sl";
 import { IoSearch } from "react-icons/io5";
-import { IoMdArrowDropdown } from "react-icons/io";
+import { IoIosHeart, IoMdArrowDropdown } from "react-icons/io";
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { MdOutlineWatchLater } from "react-icons/md";
-import Track_reload from "./TrackTable";
 
 function PlaylistTracks() {
   const token = localStorage.getItem("token");
@@ -63,15 +62,33 @@ function PlaylistTracks() {
               </tr>
             </thead>
             <tbody className="w-full flex justify-between flex-col items-center gap-5">
-              {tracks.map((item) => {
-                <Track_reload
-                  img={item?.track?.album?.images[0].url}
-                  title={item?.track?.name}
-                  singer={item?.track?.artists[0].name}
-                  album={item?.track?.album?.name}
-                  date={item?.track?.album?.release_date}
-                  duration={"0:29"}
-                />;
+              {tracks.map((item, id) => {
+                <tr className="w-full flex justify-between items-center gap-5 text-[#fff]">
+                  <div className="flex justify-center items-center gap-1">
+                    <td className="text-[22px] font-medium ">{id}</td>
+                    <td className="text-[18px] font-medium   flex justify-center items-center gap-2 pl-1">
+                      <img
+                        className="w-[52px] h-[52px] object-cover"
+                        src={item?.track?.album?.images[0].url}
+                        alt="track_photo"
+                      />
+                      <div className="flex flex-col justify-center items-center gap-1">
+                        {item?.track?.name}
+                        {item?.track?.artists[0].name}
+                      </div>
+                    </td>
+                  </div>
+                  <td className="text-[18px] font-medium  ">
+                    {item?.track?.album?.name}
+                  </td>
+                  <td className="text-[18px] font-medium  ">
+                    {item?.track?.album?.release_date}
+                  </td>
+                  <td className="text-[18px] font-medium flex justify-center items-center gap-10">
+                    <IoIosHeart color="white" size={28} />
+                    "0:29"
+                  </td>
+                </tr>
               })}
             </tbody>
           </table>

@@ -24,7 +24,7 @@ export default function Layout() {
 
     setToken(token);
   }, []);
-
+  
   if (!token) {
     navigate("/login");
   }

@@ -20,13 +20,13 @@ export default function Home() {
       .then((res) => res.json())
       .then((res) => setAboutMe(res));
 
-    fetch(base_url + "/browse/featured-playlists", {
+    fetch(base_url + "/me/playlists?limit=12&offset=0", {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     })
       .then((res) => res.json())
-      .then((res) => setPlaylists(res.playlists.items));
+      .then((res) => setPlaylists(res.items));
 
     fetch(
       base_url + "/shows?ids=5CfCWKI5pZ28U0uOzXkDHe%2C5as3aKmN2k11yfDDDSrvaZ",
