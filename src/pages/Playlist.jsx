@@ -24,6 +24,7 @@ export default function Playlist() {
       .then((res) => res.json())
       .then((res) => setChosedPlaylist(res));
 
+
     fetch(import.meta.env.VITE_BASE_URL + "/playlists/" + id, {
       headers: {
         Authorization: `Bearer ${token}`,

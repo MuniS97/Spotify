@@ -9,7 +9,7 @@ export default function PlaylistTrack({
   artist,
   album,
   date,
-  src,
+  src
 }) {
   const [track, setTrack] = useContext(TrackContext);
 
