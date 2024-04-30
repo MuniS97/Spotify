@@ -6,9 +6,15 @@ import Layout from "./layout/Layout";
 import Library from "./pages/Library";
 import Login from "./pages/Login";
 import Playlist from "./pages/Playlist";
+import { createContext, useState } from "react";
+
+export const TrackContext = createContext(null)
 
 function App() {
+  const [track, setTrack] = useState(null)
+
   return (
+    <TrackContext.Provider value={{track, setTrack}}>
     <Routes>
       <Route path="/" element={<Layout />}>
         <Route index path="/" element={<Home />} />
@@ -18,6 +24,7 @@ function App() {
       </Route>
       <Route path="/login" element={<Login />} />
     </Routes>
+    </TrackContext.Provider>
   );
 }
 

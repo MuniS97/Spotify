@@ -12,6 +12,7 @@ export default function Layout() {
   const navigate = useNavigate();
   const router = useLocation();
 
+
   useEffect(() => {
     let token = localStorage.getItem("token");
     let hash = location.hash;
