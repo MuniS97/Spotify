@@ -9,7 +9,8 @@ export default function Login() {
   const VITE_REDIRECT_URI = import.meta.env.VITE_REDIRECT_URI;
   const VITE_RESPONSE_TYPE = import.meta.env.VITE_RESPONSE_TYPE;
 
-  let url = `${VITE_AUTH_ENDPOINT}?client_id=${VITE_CLIENT_ID}&redirect_uri=${VITE_REDIRECT_URI}&response_type=${VITE_RESPONSE_TYPE}&scope=playlist-modify-public`;
+  let url = `${VITE_AUTH_ENDPOINT}?client_id=${VITE_CLIENT_ID}&redirect_uri=${VITE_REDIRECT_URI}&response_type=${VITE_RESPONSE_TYPE}&scope=user-top-read
+  `;
 
   return (
     <>

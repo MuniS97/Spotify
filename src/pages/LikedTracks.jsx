@@ -15,12 +15,12 @@ export default function LikedTracks() {
       .then((res) => res.json())
       .then((res) => setAboutMe(res));
 
-    // fetch(base_url + "/me/top/tracks", {
-    //   headers: {
-    //     Authorization: `Bearer ${token}`
-    //   }
-    // }).then(res => res.json())
-    //   .then(res => console.log(res))
+    fetch(base_url + "/me/top/tracks", {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    }).then(res => res.json())
+      .then(res => setLikedTrack(res.items))
   }, []);
 
   return (
