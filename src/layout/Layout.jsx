@@ -11,7 +11,7 @@ export default function Layout() {
   const [token, setToken] = useState("");
   const navigate = useNavigate();
   const router = useLocation();
-
+  const [libraryBtns, setLibraryBtns] = useState(false);
 
   useEffect(() => {
     let token = localStorage.getItem("token");
@@ -26,7 +26,7 @@ export default function Layout() {
 
     setToken(token);
   }, []);
-  
+
   if (!token) {
     navigate("/login");
   }
@@ -49,6 +49,22 @@ export default function Layout() {
                 type="text"
                 placeholder="Что хочешь включить?"
               />
+            </div>
+          ) : null}
+          {router.pathname.includes("library") ? (
+            <div className="pl-[55px] flex justify-center items-center gap-3">
+              <button className="px-[19px] py-[16px] text-[18px] font-medium text-white hover:bg-white/30">
+                Playlists
+              </button>
+              <button className="px-[19px] py-[16px] text-[18px] font-medium text-white hover:bg-white/30">
+                Podcasts
+              </button>
+              <button className="px-[19px] py-[16px] text-[18px] font-medium text-white hover:bg-white/30">
+                Artists
+              </button>
+              <button className="px-[19px] py-[16px] text-[18px] font-medium text-white hover:bg-white/30">
+                Albums
+              </button>
             </div>
           ) : null}
         </div>
@@ -82,7 +98,7 @@ export default function Layout() {
       <main>
         <Outlet />
       </main>
-      <Player/>
+      <Player />
     </>
   );
 }
