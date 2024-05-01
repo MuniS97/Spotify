@@ -6,6 +6,7 @@ import { LuLibrary } from "react-icons/lu";
 import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Player from "../components/Player";
+import { FaHeart } from "react-icons/fa";
 
 export default function Layout() {
   const [token, setToken] = useState("");
@@ -86,10 +87,10 @@ export default function Layout() {
                 <span className="text-lg font-bold">Search</span>
               </li>
             </Link>
-            <Link to={"/library"}>
+            <Link to={"/likedtracks"}>
               <li className="cursor-pointer text-white flex items-center justify-start gap-5 py-3 px-6">
-                <LuLibrary size={26} />
-                <span className="text-lg font-bold">Your library</span>
+                <FaHeart color="green" size={26} />
+                <span className="text-lg font-bold">Liked tracks</span>
               </li>
             </Link>
           </ul>

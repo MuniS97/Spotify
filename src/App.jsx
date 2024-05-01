@@ -3,7 +3,7 @@ import Home from "./pages/Home";
 import { Route, Routes } from "react-router-dom";
 import Search from "./pages/Search";
 import Layout from "./layout/Layout";
-import Library from "./pages/Library";
+import LikedTracks from "./pages/LikedTracks";
 import Login from "./pages/Login";
 import Playlist from "./pages/Playlist";
 import { createContext, useState } from "react";
@@ -19,7 +19,7 @@ function App() {
       <Route path="/" element={<Layout />}>
         <Route index path="/" element={<Home />} />
         <Route path="/search" element={<Search />} />
-        <Route path="/library" element={<Library />} />
+        <Route path="/likedtracks" element={<LikedTracks />} />
         <Route path="/playlist/:id" element={<Playlist />} />
       </Route>
       <Route path="/login" element={<Login />} />
