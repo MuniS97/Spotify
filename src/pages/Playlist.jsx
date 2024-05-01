@@ -25,14 +25,17 @@ export default function Playlist() {
       .then((res) => setChosedPlaylist(res));
 
 
-    fetch(import.meta.env.VITE_BASE_URL + "/playlists/" + id, {
+    fetch(import.meta.env.VITE_BASE_URL + "/playlists/" + id , {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     })
       .then((res) => res.json())
-      .then((res) => setTracks(res.tracks.items));
+      .then((res) => {
+        setTracks(res.tracks.items)
+      });
   }, []);
+
 
   return (
     <div className="h-full bg-gradient-to-b from-[#DEF628] to-[#121212] w-full">
@@ -108,7 +111,7 @@ export default function Playlist() {
               {!tracks ? (
                 <span>Loading...</span>
               ) : (
-                tracks.map((item, idx) => {
+                tracks.map((item, idx) => (
                   <PlaylistTrack
                     key={idx}
                     id={idx}
@@ -118,8 +121,8 @@ export default function Playlist() {
                     scr={item?.track?.preview_url}
                     album={item?.track?.album?.name}
                     date={item?.track?.album?.release_date}
-                  />;
-                })
+                  />
+                ))
               )}
             </tbody>
           </table>
