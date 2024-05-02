@@ -33,8 +33,8 @@ export default function Playlist() {
     })
       .then((res) => res.json())
       .then((res) => {
-        setTracks(res.tracks.items)
-        setPlaylistCTX(res.tracks.items)
+        setTracks(res.tracks.items);
+        setPlaylistCTX(res.tracks.items);
       });
   }, []);
 
@@ -96,10 +96,11 @@ export default function Playlist() {
           <table className="w-full h-full">
             <thead className="w-full flex justify-between flex-col items-center gap-5">
               <tr className="w-full text-[#fff] flex justify-between items-center border-b-[1px] border-[#fff] mb-5">
-                <th className="text-[20px] font-medium w-[20%] text-start">
-                  # TITLE
+                <th className="text-[20px] font-medium w-[5%] pl-[10px] text-start">#</th>
+                <th className="text-[20px] font-medium w-[30%] text-start">
+                  TITLE
                 </th>
-                <th className="text-[20px] font-medium w-[20%] text-start">
+                <th className="text-[20px] font-medium w-[30%] text-start">
                   ALBUM
                 </th>
                 <th className="text-[20px] font-medium w-[20%] text-start">
