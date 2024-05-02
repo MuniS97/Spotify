@@ -6,9 +6,9 @@ import Layout from "./layout/Layout";
 import LikedTracks from "./pages/LikedTracks";
 import Login from "./pages/Login";
 import Playlist from "./pages/Playlist";
-import { createContext, useState } from "react";
+import { useState } from "react";
+import { TrackContext } from "./contexts/TrackCTX";
 
-export const TrackContext = createContext(null)
 
 function App() {
   const [track, setTrack] = useState(null)

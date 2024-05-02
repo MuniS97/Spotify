@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { IoIosHeart } from "react-icons/io";
-import { TrackContext } from "../App";
+import { TrackContext } from "../contexts/TrackCTX";
 
 export default function PlaylistTrack({
   id,

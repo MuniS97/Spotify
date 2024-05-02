@@ -12,7 +12,7 @@ function Player() {
   const { track } = useContext(TrackContext);
   useEffect(()=> {
     const audio = document.querySelector('audio')
-
+    console.log(track);
     audio.play()
   }, [track]) 
   return (
