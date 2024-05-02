@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { FaCirclePlay } from "react-icons/fa6";
 import { FaRegHeart } from "react-icons/fa";
 import { MdOutlineDownloading } from "react-icons/md";
@@ -7,6 +7,7 @@ import { IoSearch } from "react-icons/io5";
 import { IoMdArrowDropdown } from "react-icons/io";
 import { MdOutlineWatchLater } from "react-icons/md";
 import PlaylistTrack from "../components/PlaylistTrack";
+import { PlaylistContext } from "../contexts/PlaylistCTX";
 
 export default function Playlist() {
   const base_url = import.meta.env.VITE_BASE_URL;
@@ -14,6 +15,7 @@ export default function Playlist() {
   const id = location.pathname.split("/").at(-1);
   const token = localStorage.getItem("token");
   const [tracks, setTracks] = useState([]);
+  const { playlistCTX, setPlaylistCTX } = useContext(PlaylistContext);
 
   useEffect(() => {
     fetch(base_url + "/playlists/" + id, {
@@ -30,7 +32,10 @@ export default function Playlist() {
       },
     })
       .then((res) => res.json())
-      .then((res) => setTracks(res.tracks.items));
+      .then((res) => {
+        setTracks(res.tracks.items)
+        setPlaylistCTX(res.tracks.items)
+      });
   }, []);
 
   return (
@@ -116,7 +121,7 @@ export default function Playlist() {
                     img={item?.track?.album?.images[0].url}
                     name={item?.track?.name}
                     artist={item?.track?.artists[0].name}
-                    scr={item?.track?.preview_url}
+                    src={item?.track?.preview_url}
                     album={item?.track?.album?.name}
                     date={item?.track?.album?.release_date}
                   />

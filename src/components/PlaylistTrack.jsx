@@ -9,10 +9,9 @@ export default function PlaylistTrack({
   artist,
   album,
   date,
-  src
+  src,
 }) {
-  const {track, setTrack} = useContext(TrackContext);
-
+  const { track, setTrack } = useContext(TrackContext);
   return (
     <tr
       onClick={() => setTrack({ id, img, name, artist, album, date, src })}
