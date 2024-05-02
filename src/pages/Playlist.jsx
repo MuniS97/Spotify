@@ -103,7 +103,7 @@ export default function Playlist() {
                 </th>
               </tr>
             </thead>
-            <tbody className="w-full flex justify-between flex-col items-center gap-5">
+            <tbody className="w-full flex justify-between flex-col items-center gap-5 mb-[150px]">
               {!tracks ? (
                 <span>Loading...</span>
               ) : (

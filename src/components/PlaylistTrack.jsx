@@ -11,7 +11,7 @@ export default function PlaylistTrack({
   date,
   src
 }) {
-  const [track, setTrack] = useContext(TrackContext);
+  const {track, setTrack} = useContext(TrackContext);
 
   return (
     <tr
@@ -19,7 +19,7 @@ export default function PlaylistTrack({
       className="w-full flex justify-between items-center gap-5 text-[#fff] p-1 rounded hover:bg-[#919191]"
     >
       <div className="flex justify-start items-center gap-1 w-[20%]">
-        <td className="text-[22px] font-medium ">{id}</td>
+        <td className="text-[22px] font-medium ">{id + 1}</td>
         <td className="text-[18px] font-medium   flex justify-center items-center gap-2 pl-1">
           <img
             className="w-[52px] h-[52px] object-cover"
