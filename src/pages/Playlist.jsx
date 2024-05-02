@@ -6,7 +6,7 @@ import { SlOptions } from "react-icons/sl";
 import { IoSearch } from "react-icons/io5";
 import { IoMdArrowDropdown } from "react-icons/io";
 import { MdOutlineWatchLater } from "react-icons/md";
-import PlaylistTrack from "../components/PlaylistTrack"
+import PlaylistTrack from "../components/PlaylistTrack";
 
 export default function Playlist() {
   const base_url = import.meta.env.VITE_BASE_URL;
@@ -24,7 +24,6 @@ export default function Playlist() {
       .then((res) => res.json())
       .then((res) => setChosedPlaylist(res));
 
-
     fetch(import.meta.env.VITE_BASE_URL + "/playlists/" + id, {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -34,7 +33,6 @@ export default function Playlist() {
       .then((res) => setTracks(res.tracks.items));
   }, []);
 
-  
   return (
     <div className="h-full bg-gradient-to-b from-[#DEF628] to-[#121212] w-full">
       <div className="px-[40px] flex justify-start items-end gap-8 py-[100px] pl-[340px] pr-10">
@@ -93,14 +91,17 @@ export default function Playlist() {
           <table className="w-full h-full">
             <thead className="w-full flex justify-between flex-col items-center gap-5">
               <tr className="w-full text-[#fff] flex justify-between items-center border-b-[1px] border-[#fff] mb-5">
-                <th className="text-[20px] font-medium w-[20%] text-start"># TITLE</th>
-                <th className="text-[20px] font-medium w-[20%] text-start">ALBUM</th>
-                <th className="text-[20px] font-medium w-[20%] text-start">DATA ADDED</th>
+                <th className="text-[20px] font-medium w-[20%] text-start">
+                  # TITLE
+                </th>
+                <th className="text-[20px] font-medium w-[20%] text-start">
+                  ALBUM
+                </th>
+                <th className="text-[20px] font-medium w-[20%] text-start">
+                  DATA ADDED
+                </th>
                 <th className="w-[20%] flex justify-end pr-5">
-                  <MdOutlineWatchLater
-                    color="#fff"
-                    size={28}
-                  />
+                  <MdOutlineWatchLater color="#fff" size={28} />
                 </th>
               </tr>
             </thead>
