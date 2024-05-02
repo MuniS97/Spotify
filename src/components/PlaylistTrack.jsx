@@ -16,9 +16,9 @@ export default function PlaylistTrack({
   return (
     <tr
       onClick={() => setTrack({ id, img, name, artist, album, date, src })}
-      className="w-full flex justify-between items-center gap-5 text-[#fff] p-1 rounded hover:bg-[#646464]"
+      className="w-full flex justify-between items-center gap-5 text-[#fff] p-1 rounded hover:bg-[#919191]"
     >
-      <div className="flex justify-center items-center gap-1">
+      <div className="flex justify-start items-center gap-1 w-[20%]">
         <td className="text-[22px] font-medium ">{id}</td>
         <td className="text-[18px] font-medium   flex justify-center items-center gap-2 pl-1">
           <img
@@ -32,9 +32,9 @@ export default function PlaylistTrack({
           </div>
         </td>
       </div>
-      <td className="text-[18px] font-medium  ">{album}</td>
-      <td className="text-[18px] font-medium  ">{date}</td>
-      <td className="text-[18px] font-medium flex justify-center items-center gap-10">
+      <td className="text-[18px] font-medium w-[20%]">{album}</td>
+      <td className="text-[18px] font-medium w-[20%]">{date}</td>
+      <td className="text-[18px] font-medium flex justify-end items-center gap-10 w-[20%]">
         <IoIosHeart color="white" size={28} />
         "0:29"
       </td>

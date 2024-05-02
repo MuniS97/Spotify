@@ -68,7 +68,7 @@ export default function Playlist() {
         </div>
       </div>
 
-      <div className="flex justify-start items-start flex-col gap-0 w-full h-screen backdrop-blur-md bg-white/30 pl-[340px] pr-10">
+      <div className="flex justify-start items-start flex-col gap-0 w-full h-full backdrop-blur-md bg-white/30 pl-[340px] pr-10">
         <div className="w-full flex justify-between items-center py-[30px] px-[40px]">
           <div className="flex justify-center items-center gap-[35px]">
             <FaCirclePlay className="cursor-pointer" size={72} color="green" />
@@ -91,13 +91,12 @@ export default function Playlist() {
         <div className="w-full -h-full pt-5">
           <table className="w-full h-full">
             <thead className="w-full flex justify-between flex-col items-center gap-5">
-              <tr className="w-full text-[#fff] flex justify-between items-center gap-5 border-b-[1px] border-[#fff] mb-5">
-                <th className="text-[22px] font-medium"># TITLE</th>
-                <th className="text-[16px] font-medium pl-[75px]">ALBUM</th>
-                <th className="text-[16px] font-medium">DATA ADDED</th>
-                <th>
+              <tr className="w-full text-[#fff] flex justify-between items-center border-b-[1px] border-[#fff] mb-5">
+                <th className="text-[20px] font-medium w-[20%] text-start"># TITLE</th>
+                <th className="text-[20px] font-medium w-[20%] text-start">ALBUM</th>
+                <th className="text-[20px] font-medium w-[20%] text-start">DATA ADDED</th>
+                <th className="w-[20%] flex justify-end pr-5">
                   <MdOutlineWatchLater
-                    className="mr-10"
                     color="#fff"
                     size={28}
                   />
@@ -108,7 +107,7 @@ export default function Playlist() {
               {!tracks ? (
                 <span>Loading...</span>
               ) : (
-                tracks.map((item, idx) => {
+                tracks.map((item, idx) => (
                   <PlaylistTrack
                     key={idx}
                     id={idx}
@@ -118,8 +117,8 @@ export default function Playlist() {
                     scr={item?.track?.preview_url}
                     album={item?.track?.album?.name}
                     date={item?.track?.album?.release_date}
-                  />;
-                })
+                  />
+                ))
               )}
             </tbody>
           </table>
