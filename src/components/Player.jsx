@@ -25,6 +25,7 @@ function Player() {
   const { track, setTrack } = useContext(TrackContext);
   const { playlistCTX } = useContext(PlaylistContext);
 
+  
   useEffect(() => {
     const audio = document.querySelector("audio");
 
