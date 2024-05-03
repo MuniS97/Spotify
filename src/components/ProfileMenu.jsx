@@ -26,7 +26,7 @@ function ProfileMenu() {
           className="select-none cursor-pointer flex items-center gap-2 bg-[#0a0a0a] rounded-3xl p-0.5 text-white"
         >
           <img
-            className="rounded-full w-[34px] h-[34px]"
+            className="rounded-full w-[34px] h-[34px] object-cover"
             src={data.images[0].url}
             alt="avatar"
           />
