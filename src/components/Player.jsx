@@ -13,14 +13,43 @@ import { TrackContext } from "../contexts/TrackCTX";
 import { PlaylistContext } from "../contexts/PlaylistCTX";
 
 function Player() {
-  const [play, setPlay] = useState(false);
+  const formatTime = (seconds) => {
+    const minutes = Math.floor(seconds / 60);
+    const remainingSeconds = Math.floor(seconds % 60);
+    return `${minutes}:${remainingSeconds < 10 ? "0" : ""}${remainingSeconds}`;
+  };
+
+  const [currentTime, setCurrentTime] = useState(0);
+
+  const [play, setPlay] = useState(true);
   const { track, setTrack } = useContext(TrackContext);
   const { playlistCTX } = useContext(PlaylistContext);
+
   useEffect(() => {
     const audio = document.querySelector("audio");
 
-    audio.play()
+    audio.play();
+
+    audio.addEventListener("timeupdate", () => {
+      setCurrentTime(audio.currentTime);
+    });
+
+    return () => {
+      audio.removeEventListener("timeupdate", () => {
+        setCurrentTime(audio.currentTime);
+      });
+    };
+
+    setPlay(play);
   }, [track]);
+
+  function PlayerCondition() {
+    const audio = document.querySelector("audio");
+
+    play ? audio.pause() : audio.play();
+
+    setPlay(!play);
+  }
 
   function nextTrack() {
     const currTrack = playlistCTX[track.id + 1];
@@ -82,8 +111,11 @@ function Player() {
           <button className="text-[#c4c4c4]">
             <MdSkipPrevious onClick={prevTrack} size={32} />
           </button>
-          <button className="w-[48px] h-[48px] flex items-center justify-center text-center bg-white rounded-full">
-            {true ? <IoPlay size={25} /> : <IoPause size={25} />}
+          <button
+            className="w-[48px] h-[48px] flex items-center justify-center text-center bg-white rounded-full"
+            onClick={PlayerCondition}
+          >
+            {play ? <IoPlay size={25} /> : <IoPause size={25} />}
           </button>
           <button onClick={nextTrack} className="text-[#c4c4c4]">
             <MdSkipNext size={32} />
@@ -93,8 +125,15 @@ function Player() {
           </button>
         </div>
         <div className="w-full flex items-center gap-2 text-[#c4c4c4]">
-          <span>0:12</span>
-          <input type="range" className="w-[630px]" />
+          <span>{formatTime(currentTime)}</span>
+          <input
+            type="range"
+            className="w-[630px]"
+            min="0"
+            max={track?.duration}
+            value={currentTime}
+            onChange={(e) => setCurrentTime(e.target.value)}
+          />
           <span>0:29</span>
         </div>
       </div>
