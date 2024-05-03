@@ -1,6 +1,7 @@
 import { TiArrowSortedDown } from "react-icons/ti";
 import { RxExternalLink } from "react-icons/rx";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 function ProfileMenu() {
   const [isOpen, setIsOpen] = useState(false);
@@ -50,9 +51,11 @@ function ProfileMenu() {
             <li className="flex items-center justify-between cursor-pointer">
               <span>Profile</span>
             </li>
-            <li className="flex items-center justify-between cursor-pointer">
-              <span>Log out</span>
-            </li>
+            <Link to={"/login"}>
+              <li className="flex items-center justify-between cursor-pointer">
+                <span>Log out</span>
+              </li>
+            </Link>
           </ul>
         </div>
       ) : null}
