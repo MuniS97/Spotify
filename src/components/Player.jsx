@@ -39,8 +39,6 @@ function Player() {
         setCurrentTime(audio.currentTime);
       });
     };
-
-    setPlay(play);
   }, [track]);
 
   function PlayerCondition() {
