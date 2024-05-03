@@ -38,7 +38,7 @@ function Player() {
       audio.removeEventListener("timeupdate", () => {
         setCurrentTime(audio.currentTime);
       });
-    };
+    }; 
   }, [track]);
 
   function PlayerCondition() {
