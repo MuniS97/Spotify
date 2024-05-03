@@ -13,7 +13,6 @@ import { PlaylistContext} from "./contexts/PlaylistCTX"
 function App() {
   const [track, setTrack] = useState(null);
   const [playlistCTX, setPlaylistCTX] = useState([])
-
   return (
     <PlaylistContext.Provider value={{playlistCTX, setPlaylistCTX}}>
       <TrackContext.Provider value={{ track, setTrack }}>
