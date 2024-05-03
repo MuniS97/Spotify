@@ -9,7 +9,7 @@ export default function Home() {
   const [albums, setAlbums] = useState([]);
   const [aboutMe, setAboutMe] = useState([]);
   const [tracksForMe, setTracksForMe] = useState([]);
-  const [recommended, setRecommended] = useState([])
+  const [recommended, setRecommended] = useState([]);
 
   useEffect(() => {
     fetch(base_url + "/me", {
@@ -39,33 +39,34 @@ export default function Home() {
       .then((res) => res.json())
       .then((res) => setAlbums(res.shows));
 
-    fetch(base_url + "/browse/new-releases", {
+    fetch(base_url + "/browse/featured-playlists", {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     })
       .then((res) => res.json())
-      .then((res) => setTracksForMe(res.albums.items));
+      .then((res) => setTracksForMe(res.playlists.items));
 
     fetch(base_url + "/recommendations?seed_genres=j-rock%2Ccountry", {
       headers: {
-        Authorization: `Bearer ${token}`
-      }
-    }).then(res => res.json())
-      .then(res => setRecommended(res.tracks))
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((res) => res.json())
+      .then((res) => setRecommended(res.tracks));
   }, []);
 
   return (
-    <div className="h-full pl-[340px] pr-10  w-full bg-[#222222]">
+    <div className="h-full pl-[340px] pr-10  w-full bg-[#222222] pb-[150px]">
       <div className="w-full flex justify-start items-start flex-col gap-[18px]">
         <h2 className="text-[38px] font-bold text-white">Good morning</h2>
         <div className="grid grid-cols-4 justify-start items-start gap-x-[30px] gap-y-5">
           {playlists.slice(0, 4).map((item) => (
             <SmallPlaylist
-              key={item.id}
-              title={item.name}
-              img={item.images[0].url}
-              id={item.id}
+              key={item?.id}
+              title={item?.name}
+              img={item?.images[0].url}
+              id={item?.id}
             />
           ))}
         </div>
@@ -79,13 +80,13 @@ export default function Home() {
             SEE ALL
           </a>
         </div>
-        <div className="grid grid-cols-6 justify-start items-start gap-x-[30px] gap-y-5">
+        <div className="grid grid-cols-4 justify-start items-start gap-x-[30px] gap-y-5">
           {tracksForMe.slice(0, 6).map((item) => (
-            <Album
-              key={item.id}
-              img={item.images[0].url}
-              title={item.name}
-              author={item.artists[0].name}
+            <SmallPlaylist
+              key={item?.id}
+              img={item?.images[0].url}
+              title={item?.name}
+              id={item?.id}
             />
           ))}
         </div>
@@ -105,7 +106,7 @@ export default function Home() {
           ))}
         </div>
       </div>
-      {/* <div className="w-full flex flex-col justify-start items-start gap-7">
+      <div className="w-full flex flex-col justify-start items-start gap-7">
         <div className="w-full flex justify-between items-center text-white pt-10">
           <h2 className="font-bold text-3xl">J-Rock recommendations</h2>
           <a href="#" className="font-normal text-[17px] no-underline">
@@ -113,17 +114,16 @@ export default function Home() {
           </a>
         </div>
         <div className="grid grid-cols-6 justify-start items-start gap-x-[30px] gap-y-5">
-          {recommended.map(item => {
+          {recommended.slice(0, 12).map((item) => (
             <Album
-            key={item.id}
-            img={item.album.images[0].url}
-            title={item.album.name}
-            author={item.album.artists[0].name}
+              key={item?.id}
+              img={item?.album?.images[0]?.url}
+              title={item?.album?.name}
+              author={item?.album?.artists[0]?.name}
             />
-          })
-          }
+          ))}
         </div>
-       </div> */}
+      </div>
     </div>
   );
 }
