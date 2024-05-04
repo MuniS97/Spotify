@@ -4,18 +4,25 @@ import { AiFillHome } from "react-icons/ai";
 import { FiSearch } from "react-icons/fi";
 import { LuLibrary } from "react-icons/lu";
 import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Player from "../components/Player";
 import { FaHeart } from "react-icons/fa";
-
+import { SearchValueContext } from "../contexts/SearchValueCTX";
 
 export default function Layout() {
   const [token, setToken] = useState("");
   const navigate = useNavigate();
   const router = useLocation();
   const [libraryBtns, setLibraryBtns] = useState(false);
+  let timer;
 
-
+  function debounce(value) {
+    clearTimeout(timer);
+    timer = setTimeout(() => {
+      setSearchValueCTX(value);
+    }, 1000);
+  }
+  const { setSearchValueCTX } = useContext(SearchValueContext);
 
   useEffect(() => {
     let token = localStorage.getItem("token");
@@ -39,13 +46,13 @@ export default function Layout() {
     <>
       <header className="bg-[#222222] w-full flex justify-between items-center pl-[340px] pr-10 py-5 z-10">
         <div className="flex items-center gap-1">
-          <button 
+          <button
             onClick={() => navigate(-1)}
             className="bg-[#131313] rounded-full p-2"
           >
             <MdKeyboardArrowLeft size={24} color="white" />
           </button>
-          <button 
+          <button
             className="bg-[#131313] rounded-full p-2"
             onClick={() => navigate(+1)}
           >
@@ -55,6 +62,7 @@ export default function Layout() {
             <div className="relative mx-5">
               <FiSearch size={32} className="absolute left-4 top-[10px]" />
               <input
+                onKeyUp={(e) => debounce(e.target.value)}
                 className="w-[468px] h-[52px] rounded-3xl border-none outline-gray-300 px-[60px] text-slate-500 text-[18px] font-normal"
                 type="text"
                 placeholder="Что хочешь включить?"

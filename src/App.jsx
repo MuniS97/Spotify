@@ -8,25 +8,29 @@ import Login from "./pages/Login";
 import Playlist from "./pages/Playlist";
 import { useState } from "react";
 import { TrackContext } from "./contexts/TrackCTX";
-import { PlaylistContext} from "./contexts/PlaylistCTX"
+import { PlaylistContext } from "./contexts/PlaylistCTX";
+import { SearchValueContext } from "./contexts/SearchValueCTX";
 
 function App() {
   const [track, setTrack] = useState(null);
-  const [playlistCTX, setPlaylistCTX] = useState([])
+  const [playlistCTX, setPlaylistCTX] = useState([]);
+  const [searchValueCTX, setSearchValueCTX] = useState("");
   return (
-    <PlaylistContext.Provider value={{playlistCTX, setPlaylistCTX}}>
-      <TrackContext.Provider value={{ track, setTrack }}>
-        <Routes>
-          <Route path="/" element={<Layout />}>
-            <Route index path="/" element={<Home />} />
-            <Route path="/search" element={<Search />} />
-            <Route path="/likedtracks" element={<LikedTracks />} />
-            <Route path="/playlist/:id" element={<Playlist />} />
-          </Route>
-          <Route path="/login" element={<Login />} />
-        </Routes>
-      </TrackContext.Provider>
-    </PlaylistContext.Provider>
+    <SearchValueContext.Provider value={{ searchValueCTX, setSearchValueCTX }}>
+      <PlaylistContext.Provider value={{ playlistCTX, setPlaylistCTX }}>
+        <TrackContext.Provider value={{ track, setTrack }}>
+          <Routes>
+            <Route path="/" element={<Layout />}>
+              <Route index path="/" element={<Home />} />
+              <Route path="/search" element={<Search />} />
+              <Route path="/likedtracks" element={<LikedTracks />} />
+              <Route path="/playlist/:id" element={<Playlist />} />
+            </Route>
+            <Route path="/login" element={<Login />} />
+          </Routes>
+        </TrackContext.Provider>
+      </PlaylistContext.Provider>
+    </SearchValueContext.Provider>
   );
 }
 
