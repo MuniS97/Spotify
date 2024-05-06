@@ -14,9 +14,9 @@ import { SearchValueContext } from "./contexts/SearchValueCTX";
 function App() {
   const [track, setTrack] = useState(null);
   const [playlistCTX, setPlaylistCTX] = useState([]);
-  const [searchValueCTX, setSearchValueCTX] = useState("");
+  const [searchResult, setSearchResult] = useState("");
   return (
-    <SearchValueContext.Provider value={{ searchValueCTX, setSearchValueCTX }}>
+    <SearchValueContext.Provider value={{ searchResult, setSearchResult }}>
       <PlaylistContext.Provider value={{ playlistCTX, setPlaylistCTX }}>
         <TrackContext.Provider value={{ track, setTrack }}>
           <Routes>

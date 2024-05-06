@@ -14,16 +14,30 @@ export default function Layout() {
   const navigate = useNavigate();
   const router = useLocation();
   const [libraryBtns, setLibraryBtns] = useState(false);
+
+  const baseUrl = import.meta.env.VITE_BASE_URL;
+  const getToken = localStorage.getItem("token");
+
+  const { setSearchResult } = useContext(SearchValueContext);
   let timer;
 
   function debounce(value) {
     clearTimeout(timer);
     timer = setTimeout(() => {
-      setSearchValueCTX(value);
+      value.length >= 1
+        ? fetch(
+            `${baseUrl}/search?q=${value}&type=album%2Cplaylist%2Ctrack%2Cartist%2Cshow&limit=5`,
+            {
+              headers: {
+                Authorization: `Bearer ${getToken}`,
+              },
+            }
+          )
+            .then((res) => res.json())
+            .then((res) => setSearchResult(res))
+        : null;
     }, 1000);
   }
-  const { setSearchValueCTX } = useContext(SearchValueContext);
-
   useEffect(() => {
     let token = localStorage.getItem("token");
     let hash = location.hash;
