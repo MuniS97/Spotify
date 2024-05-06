@@ -5,7 +5,7 @@ import {
   MdSkipNext,
   MdOutlineCloseFullscreen,
 } from "react-icons/md";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { HiOutlineQueueList } from "react-icons/hi2";
 import { TbDevices2 } from "react-icons/tb";
 import { IoMdVolumeHigh } from "react-icons/io";
@@ -25,27 +25,24 @@ function Player() {
   const { track, setTrack } = useContext(TrackContext);
   const { playlistCTX } = useContext(PlaylistContext);
 
-  
+  const audio_ref = useRef(null);
+
   useEffect(() => {
-    const audio = document.querySelector("audio");
+    audio_ref.current.play();
 
-    audio.play();
-
-    audio.addEventListener("timeupdate", () => {
-      setCurrentTime(audio.currentTime);
+    audio_ref.current.addEventListener("timeupdate", () => {
+      setCurrentTime(audio_ref.current.currentTime);
     });
 
     return () => {
-      audio.removeEventListener("timeupdate", () => {
-        setCurrentTime(audio.currentTime);
+      audio_ref.current.removeEventListener("timeupdate", () => {
+        setCurrentTime(audio_ref.current.currentTime);
       });
-    }; 
+    };
   }, [track]);
 
   function PlayerCondition() {
-    const audio = document.querySelector("audio");
-
-    play ? audio.pause() : audio.play();
+    play ? audio_ref.current.pause() : audio_ref.current.play();
 
     setPlay(!play);
   }
@@ -102,7 +99,7 @@ function Player() {
         </button>
       </div>
       <div className="w-[30%] flex items-center flex-col justify-center gap-2">
-        <audio src={track?.src} hidden controls></audio>
+        <audio src={track?.src} hidden controls ref={audio_ref}></audio>
         <div className="flex items-center gap-[22px]">
           <button className="text-[#c4c4c4]">
             <IoShuffle size={32} />
@@ -147,7 +144,16 @@ function Player() {
           <button className="text-[#c4c4c4]">
             <IoMdVolumeHigh size={32} />
           </button>
-          <input type="range" className="w-[120px]" />
+          <input
+            type="range"
+            className="w-[120px]"
+            min={0}
+            max={10}
+            defaultValue={10}
+            onChange={(e) => {
+              audio_ref.current.volume = +e.target.value / 10;
+            }}
+          />
           <button className="text-[#c4c4c4]">
             <MdOutlineCloseFullscreen size={32} />
           </button>
