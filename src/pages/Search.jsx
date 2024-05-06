@@ -27,12 +27,16 @@ export default function Search() {
                 {searchResult
                   ? searchResult.tracks.items
                       .slice(1, searchResult.tracks.items.length + 1)
-                      .map((item) => (
+                      .map((item, idx) => (
                         <SearchTracks
                           img={item.album.images[0]?.url}
-                          title={item.album.name}
+                          name={item.album.name}
                           artist={item.album.artists[0]?.name}
-                          key={item.id}
+                          key={idx}
+                          id={idx}
+                          src={item.preview_url}
+                          date={item.album.release_date}
+                          album={item.album.name}
                         />
                       ))
                   : null}
