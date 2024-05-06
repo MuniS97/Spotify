@@ -27,6 +27,8 @@ function Player() {
 
   const audio_ref = useRef(null);
 
+  currentTime > 29 ? nextTrack() : null;
+
   useEffect(() => {
     audio_ref.current.play();
 
