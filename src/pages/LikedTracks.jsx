@@ -22,7 +22,7 @@ export default function LikedTracks() {
   }, []);
 
   return (
-    <div className="h-full bg-gradient-to-b from-blue-700 to-[#121212] w-full flex flex-col items-start justify-start gap-5">
+    <div className="h-full bg-gradient-to-b from-purple-700 to-[#121212] w-full flex flex-col items-start justify-start gap-5">
       <div className="pl-[340px] pr-10 flex justify-start items-end gap-5 p-[50px]">
         <img
           className="w[297px] h-[297px] rounded"

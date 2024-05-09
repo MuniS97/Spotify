@@ -8,6 +8,9 @@ import { useContext, useEffect, useState } from "react";
 import Player from "../components/Player";
 import { FaHeart } from "react-icons/fa";
 import { SearchValueContext } from "../contexts/SearchValueCTX";
+import { FaArrowRight } from "react-icons/fa6";
+import { HttpRequest } from "../hooks/http.request";
+import FollowedArtists from "../components/FollowedArtists";
 
 export default function Layout() {
   const [token, setToken] = useState("");
@@ -17,6 +20,9 @@ export default function Layout() {
 
   const baseUrl = import.meta.env.VITE_BASE_URL;
   const getToken = localStorage.getItem("token");
+
+  const { loading, error, request } = HttpRequest();
+  const [followedArtists, setFollowedArtists] = useState([]);
 
   const { setSearchResult } = useContext(SearchValueContext);
   let timer;
@@ -55,6 +61,11 @@ export default function Layout() {
   if (!token) {
     navigate("/login");
   }
+  useEffect(() => {
+    request("/me/following?type=artist").then((res) =>
+      setFollowedArtists(res.artists.items)
+    );
+  }, []);
 
   return (
     <>
@@ -104,28 +115,48 @@ export default function Layout() {
       </header>
       <aside className="z-10 w-[300px] bg-black px-2.5 py-8 fixed top-0 left-0 bottom-0 flex flex-col items-start gap-[30px]">
         <img className="pl-6" src="/icons/big-logo.svg" alt="logo" />
-        <nav>
-          <ul>
-            <Link to={"/"}>
-              <li className="cursor-pointer text-white flex items-center justify-start gap-5 py-3 px-6">
-                <AiFillHome size={26} />
-                <span className="text-lg font-bold">Home</span>
+        <div className="w-full">
+          <nav className="h-full bg-[#1b1b1b] rounded-lg">
+            <ul>
+              <Link to={"/"}>
+                <li className="hover:text-white hover:bg-[#222222] rounded-lg transition-all mb-1 cursor-pointer text-gray-300 flex items-center justify-start gap-5 py-3 px-6">
+                  <AiFillHome size={26} />
+                  <span className="text-lg font-bold">Home</span>
+                </li>
+              </Link>
+              <Link to={"/search"}>
+                <li className="hover:text-white hover:bg-[#222222] rounded-lg transition-all cursor-pointer text-gray-300 flex items-center justify-start gap-5 py-3 px-6">
+                  <FiSearch size={26} />
+                  <span className="text-lg font-bold">Search</span>
+                </li>
+              </Link>
+            </ul>
+          </nav>
+        </div>
+        <div className="w-full">
+          <nav className="h-full bg-[#1b1b1b] rounded-lg">
+            <ul>
+              <li className=" transition-all  cursor-pointer text-white flex items-center justify-between gap-5 py-3 px-6">
+                <div className="flex items-center justify-center gap-5">
+                  <LuLibrary size={26} />
+                  <span className="text-lg font-bold">Library</span>
+                </div>
+                <FaArrowRight size={26} />
               </li>
-            </Link>
-            <Link to={"/search"}>
-              <li className="cursor-pointer text-white flex items-center justify-start gap-5 py-3 px-6">
-                <FiSearch size={26} />
-                <span className="text-lg font-bold">Search</span>
-              </li>
-            </Link>
-            <Link to={"/likedtracks"}>
-              <li className="cursor-pointer text-white flex items-center justify-start gap-5 py-3 px-6">
-                <FaHeart color="green" size={26} />
-                <span className="text-lg font-bold">Liked tracks</span>
-              </li>
-            </Link>
-          </ul>
-        </nav>
+              <Link to={"/likedtracks"}>
+                <li className="hover:text-white hover:bg-[#222222] cursor-pointer rounded-lg text-gray-300 flex items-center justify-start gap-5 py-5 px-6">
+                  <FaHeart color="green" size={26} />
+                  <span className="text-lg font-bold">Liked tracks</span>
+                </li>
+              </Link>
+              {followedArtists
+                ? followedArtists.map((item) => (
+                    <FollowedArtists name={item.name} key={item.id} />
+                  ))
+                : null}
+            </ul>
+          </nav>
+        </div>
       </aside>
       <main>
         <Outlet />

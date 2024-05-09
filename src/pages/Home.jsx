@@ -39,14 +39,18 @@ export default function Home() {
       <div className="w-full flex justify-start items-start flex-col gap-[18px]">
         <h2 className="text-[38px] font-bold text-white">Good morning</h2>
         <div className="grid grid-cols-4 justify-start items-start gap-x-[30px] gap-y-5">
-          {playlists.slice(0, 4).map((item) => (
-            <SmallPlaylist
-              key={item?.id}
-              title={item?.name}
-              img={item?.images[0].url}
-              id={item?.id}
-            />
-          ))}
+          {playlists
+            ? playlists
+                .slice(0, 4)
+                .map((item) => (
+                  <SmallPlaylist
+                    key={item?.id}
+                    title={item?.name}
+                    img={item?.images[0].url}
+                    id={item?.id}
+                  />
+                ))
+            : null}
         </div>
       </div>
       <div className="w-full flex flex-col justify-start items-start gap-7">
@@ -92,14 +96,18 @@ export default function Home() {
           </a>
         </div>
         <div className="grid grid-cols-6 justify-start items-start gap-x-[30px] gap-y-5">
-          {recommended.slice(0, 12).map((item) => (
-            <Album
-              key={item?.id}
-              img={item?.album?.images[0]?.url}
-              title={item?.album?.name}
-              author={item?.album?.artists[0]?.name}
-            />
-          ))}
+          {recommended
+            ? recommended
+                .slice(0, 12)
+                .map((item) => (
+                  <Album
+                    key={item?.id}
+                    img={item?.album?.images[0]?.url}
+                    title={item?.album?.name}
+                    author={item?.album?.artists[0]?.name}
+                  />
+                ))
+            : null}
         </div>
       </div>
     </div>
