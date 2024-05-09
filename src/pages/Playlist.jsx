@@ -8,6 +8,7 @@ import { IoMdArrowDropdown } from "react-icons/io";
 import { MdOutlineWatchLater } from "react-icons/md";
 import PlaylistTrack from "../components/PlaylistTrack";
 import { PlaylistContext } from "../contexts/PlaylistCTX";
+import { HttpRequest } from "../hooks/http.request";
 
 export default function Playlist() {
   const base_url = import.meta.env.VITE_BASE_URL;
@@ -17,25 +18,15 @@ export default function Playlist() {
   const [tracks, setTracks] = useState([]);
   const { playlistCTX, setPlaylistCTX } = useContext(PlaylistContext);
 
-  useEffect(() => {
-    fetch(base_url + "/playlists/" + id, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    })
-      .then((res) => res.json())
-      .then((res) => setChosedPlaylist(res));
+  const { loading, error, request } = HttpRequest();
 
-    fetch(import.meta.env.VITE_BASE_URL + "/playlists/" + id, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    })
-      .then((res) => res.json())
-      .then((res) => {
-        setTracks(res.tracks.items);
-        setPlaylistCTX(res.tracks.items);
-      });
+  useEffect(() => {
+    request(`/playlists/${id}`).then((res) => setChosedPlaylist(res));
+
+    request(`/playlists/${id}`).then((res) => {
+      setTracks(res.tracks.items);
+      setPlaylistCTX(res.tracks.items);
+    });
   }, []);
 
   return (
@@ -96,7 +87,9 @@ export default function Playlist() {
           <table className="w-full h-full">
             <thead className="w-full flex justify-between flex-col items-center gap-5">
               <tr className="w-full text-[#fff] flex justify-between items-center border-b-[1px] border-[#fff] mb-5">
-                <th className="text-[20px] font-medium w-[5%] pl-[10px] text-start">#</th>
+                <th className="text-[20px] font-medium w-[5%] pl-[10px] text-start">
+                  #
+                </th>
                 <th className="text-[20px] font-medium w-[30%] text-start">
                   TITLE
                 </th>

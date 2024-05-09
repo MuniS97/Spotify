@@ -4,10 +4,13 @@ import BestResult from "../components/BestResult";
 import SearchTracks from "../components/SearchTracks";
 import SearchPlaylist from "../components/SearchPlaylist";
 import SearchArtists from "../components/SearchArtists";
+import { HttpRequest } from "../hooks/http.request";
 
 export default function Search() {
   const { searchResult } = useContext(SearchValueContext);
-  console.log(searchResult);
+
+  const { loading, error, request } = HttpRequest();
+
   return (
     <div className="pl-[340px] pr-10  w-full bg-[#222222] h-full min-h-[1000px] pb-[150px]">
       {searchResult === "" ? (

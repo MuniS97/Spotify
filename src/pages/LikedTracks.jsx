@@ -5,6 +5,7 @@ import { IoMdArrowDropdown } from "react-icons/io";
 import { IoSearch } from "react-icons/io5";
 import { SlOptions } from "react-icons/sl";
 import { FaCirclePlay, FaRegHeart } from "react-icons/fa6";
+import { HttpRequest } from "../hooks/http.request";
 
 export default function LikedTracks() {
   const base_url = import.meta.env.VITE_BASE_URL;
@@ -12,22 +13,12 @@ export default function LikedTracks() {
   const [aboutMe, setAboutMe] = useState({});
   const [likedTrack, setLikedTrack] = useState([]);
 
-  useEffect(() => {
-    fetch(base_url + "/me", {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    })
-      .then((res) => res.json())
-      .then((res) => setAboutMe(res));
+  const { loading, error, request } = HttpRequest();
 
-    fetch(base_url + "/me/top/tracks", {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    })
-      .then((res) => res.json())
-      .then((res) => setLikedTrack(res.items));
+  useEffect(() => {
+    request("/me").then((res) => setAboutMe(res));
+
+    request("/me/top/tracks").then((res) => setLikedTrack(res.items));
   }, []);
 
   return (

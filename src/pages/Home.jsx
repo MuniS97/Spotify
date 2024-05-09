@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import SmallPlaylist from "../components/SmallPlaylist";
 import Album from "../components/Album";
+import { HttpRequest } from "../hooks/http.request";
 
 export default function Home() {
   const base_url = import.meta.env.VITE_BASE_URL;
@@ -11,49 +12,26 @@ export default function Home() {
   const [tracksForMe, setTracksForMe] = useState([]);
   const [recommended, setRecommended] = useState([]);
 
+  const { loading, error, request } = HttpRequest();
+
   useEffect(() => {
-    fetch(base_url + "/me", {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    })
-      .then((res) => res.json())
-      .then((res) => setAboutMe(res));
+    request("/me").then((res) => setAboutMe(res));
 
-    fetch(base_url + "/me/playlists?limit=12&offset=0", {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    })
-      .then((res) => res.json())
-      .then((res) => setPlaylists(res.items));
+    request("/me/playlists?limit=12&offset=0").then((res) =>
+      setPlaylists(res.items)
+    );
 
-    fetch(
-      base_url + "/shows?ids=5CfCWKI5pZ28U0uOzXkDHe%2C5as3aKmN2k11yfDDDSrvaZ",
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    )
-      .then((res) => res.json())
-      .then((res) => setAlbums(res.shows));
+    request("/shows?ids=5CfCWKI5pZ28U0uOzXkDHe%2C5as3aKmN2k11yfDDDSrvaZ").then(
+      (res) => setAlbums(res.shows)
+    );
 
-    fetch(base_url + "/browse/featured-playlists", {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    })
-      .then((res) => res.json())
-      .then((res) => setTracksForMe(res.playlists.items));
+    request("/browse/featured-playlists").then((res) =>
+      setTracksForMe(res.playlists.items)
+    );
 
-    fetch(base_url + "/recommendations?seed_genres=j-rock%2Ccountry", {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    })
-      .then((res) => res.json())
-      .then((res) => setRecommended(res.tracks));
+    request("/recommendations?seed_genres=j-rock%2Ccountry").then((res) =>
+      setRecommended(res.tracks)
+    );
   }, []);
 
   return (
